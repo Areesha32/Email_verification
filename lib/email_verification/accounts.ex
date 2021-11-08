@@ -21,12 +21,20 @@ defmodule EmailVerification.Accounts do
       [%User{}, ...]
 
   """
+  def get_by(username) do
+    Repo.get_by(User, username: username)
+  end
 
-  defp get_by_email(email) when is_binary(email) do
+  def get_by_token(token) do
+    Repo.get_by(User, token: token)
+  end
+
+  def get_by_email(email) when is_binary(email) do
     case Repo.get_by(User, email: email) do
       nil ->
         dummy_checkpw()
         {:error, "Login error."}
+
       user ->
         {:ok, user}
     end
@@ -42,13 +50,14 @@ defmodule EmailVerification.Accounts do
 
   defp email_password_auth(email, password) when is_binary(email) and is_binary(password) do
     with {:ok, user} <- get_by_email(email),
-    do: verify_password(password, user)
+         do: verify_password(password, user)
   end
 
   def token_sign_in(email, password) do
     case email_password_auth(email, password) do
       {:ok, user} ->
         Guardian.encode_and_sign(user)
+
       _ ->
         {:error, :unauthorized}
     end

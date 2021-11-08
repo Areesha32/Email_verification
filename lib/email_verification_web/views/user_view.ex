@@ -21,4 +21,14 @@ defmodule EmailVerificationWeb.UserView do
   def render("jwt.json", %{jwt: jwt}) do
     %{jwt: jwt}
   end
+
+
+	def render("verify_email.json", %{user: user}) do
+		%{
+      name: user.name,
+      email: user.email,
+			verified: user.email_verified,
+      description: "You have successfully verified your email"
+		}
+	end
 end

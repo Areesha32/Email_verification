@@ -37,15 +37,8 @@ config :email_verification, EmailVerification.Mailer,
   tls: :always,
   auth: :false,
   port: 587,
-  # dkim: [
-  #   s: "default", d: "domain.com",
-  #   private_key: {:pem_plain, File.read!("priv/keys/domain.private")}
-  # ],
   retries: 2,
   no_mx_lookups: false
-
-
-# config :email_verification, EmailVerification.Mailer, adapter: Bamboo.SMTPAdapter
 
 config :email_verification, EmailVerification.Mailer, adapter: Swoosh.Adapters.SMTP
 config :swoosh, :api_client, false

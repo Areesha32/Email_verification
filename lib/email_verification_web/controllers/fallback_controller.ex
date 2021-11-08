@@ -27,4 +27,10 @@ defmodule EmailVerificationWeb.FallbackController do
     |> put_status(:unauthorized)
     |> json(%{error: "Login error"})
   end
+
+  def call(conn, {:error, :not_verified}) do
+    conn
+    |> put_status(:unauthorized)
+    |> json(%{error: "Email not verified"})
+  end
 end

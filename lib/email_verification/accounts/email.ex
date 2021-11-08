@@ -1,26 +1,20 @@
 defmodule EmailVerification.Accounts.Email do
-  # import Bamboo.Email
   import Swoosh.Email
 
   alias EmailVerification.Mailer
-  # def welcome_email do
-  #   new_email(
-  #     to: "087079e608-1a1dba@inbox.mailtrap.io",
-  #     from: "087079e608-1a1dba@inbox.mailtrap.io",
-  #     subject: "Welcome to the app.",
-  #     html_body: "<strong>Thanks for joining!</strong>",
-  #     text_body: "Thanks for joining!"
-  #   )
 
-  # end
-
-  defp deliver() do
+  def deliver(user) do
     email =
       new()
-      |> to("arisha.iftikhar@gmail.com")
+      |> to("087079e608-1a1dba@inbox.mailtrap.io")
       |> from("087079e608-1a1dba@inbox.mailtrap.io")
-      |> subject("Welcome to the app.")
-      |> text_body("Thanks for joining!")
+      |> subject("App Login")
+      |> html_body("
+            <h1>Verification Required</h1>
+            <p>Kindly click the link given below to verify your email.</p>
+            <a href=http://localhost:4000/api/v1/auth/verify_email/#{user.token}>Email Verification Link!</a>
+      ")
+      |> text_body("Email sending for verification of your respective email.")
 
     IO.inspect(email)
 
@@ -29,7 +23,4 @@ defmodule EmailVerification.Accounts.Email do
     end
   end
 
-  def deliver_confirmation_instructions() do
-    deliver()
-  end
 end

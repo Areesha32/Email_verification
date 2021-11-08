@@ -3,9 +3,11 @@ defmodule EmailVerification.Repo.Migrations.CreateUsers do
 
   def change do
     create table(:users) do
-      add :name, :string
-      add :email, :string
-      add :hash_password, :string
+    	add :name, :string
+  		add :email, :string
+  		add :token, :string
+  		add :email_verified, :boolean
+  		add :hash_password, :string
 
       timestamps()
     end

@@ -7,11 +7,16 @@
 # General application configuration
 import Config
 
-
-
 config :email_verification, EmailVerification.Guardian,
-       issuer: "email_verification",
-       secret_key: "9teNnjuLabq0WbNEFq/pY78S/CI3Fj3fz001xhMwT/GCKOnGV5DsPytjoQWVELXh"
+  allowed_algos: ["HS512"], # optional
+  verify_module: Guardian.JWT,  # optional
+  issuer: "email_verification",
+  ttl: { 30, :days },
+  allowed_drift: 2000,
+  verify_issuer: true, # optional
+  secret_key: "9teNnjuLabq0WbNEFq/pY78S/CI3Fj3fz001xhMwT/GCKOnGV5DsPytjoQWVELXh",
+  serializer: EmailVerification.GuardianSerializer
+
 
 config :email_verification,
   ecto_repos: [EmailVerification.Repo]
