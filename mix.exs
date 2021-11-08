@@ -20,7 +20,7 @@ defmodule EmailVerification.MixProject do
   def application do
     [
       mod: {EmailVerification.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :bamboo, :bamboo_smtp]
     ]
   end
 
@@ -51,7 +51,11 @@ defmodule EmailVerification.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 1.0"},
-      {:guardian, "~> 1.0"}
+      {:guardian, "~> 1.0"},
+      {:bamboo, "~> 2.2.0"},
+      {:bamboo_smtp, "~> 4.1"},
+      {:finch, "~> 0.8"},
+      {:gen_smtp, "~> 1.1.1"},
     ]
   end
 

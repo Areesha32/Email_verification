@@ -14,6 +14,15 @@ if config_env() == :prod do
       For example: ecto://USER:PASS@HOST/DATABASE
       """
 
+  if config_env() == :prod or config_env() == :dev do
+    # Configuring the mailer
+    config :email_verification, EmailVerification.Mailer,
+      adapter: Swoosh.Adapters.SMTP,
+      api_key: "9034673b8cafa4e28a4933681b5dd5f2"
+
+    config :swoosh, :api_client, Swoosh.ApiClient.Finch
+  end
+
   config :email_verification, EmailVerification.Repo,
     # ssl: true,
     # socket_options: [:inet6],

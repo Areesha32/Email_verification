@@ -15,6 +15,41 @@ config :email_verification, EmailVerification.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with esbuild to bundle .js and .css sources.
+
+# context = %Mailman.Context{
+#   config: %Mailman.SmtpConfig{
+#       relay: "yourtdomain.com",
+#       username: "5082e0034942cf",
+#       password: "21ecd46f57e0cb",
+#       port: 2525,
+#       tls: :always,
+#       auth: :always,
+#   },
+#   composer: %Mailman.EexComposeConfig{}
+# }
+
+config :email_verification, EmailVerification.Mailer,
+  adapter: Swoosh.Adapters.SMTP,
+  relay: "smtp.mailtrap.io",
+  username: "5082e0034942cf",
+  password: "21ecd46f57e0cb",
+  ssl: false,
+  tls: :always,
+  auth: :false,
+  port: 587,
+  # dkim: [
+  #   s: "default", d: "domain.com",
+  #   private_key: {:pem_plain, File.read!("priv/keys/domain.private")}
+  # ],
+  retries: 2,
+  no_mx_lookups: false
+
+
+# config :email_verification, EmailVerification.Mailer, adapter: Bamboo.SMTPAdapter
+
+config :email_verification, EmailVerification.Mailer, adapter: Swoosh.Adapters.SMTP
+config :swoosh, :api_client, false
+
 config :email_verification, EmailVerificationWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.

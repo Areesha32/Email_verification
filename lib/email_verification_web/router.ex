@@ -34,6 +34,10 @@ defmodule EmailVerificationWeb.Router do
     post "users/sign_in", UserController, :sign_in
 
     get "/verify", UserController, :verify_email
+
+    if Mix.env == :dev do
+      forward "/sent_emails", Bamboo.EmailPreviewPlug
+    end
   end
 
 

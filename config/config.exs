@@ -7,6 +7,8 @@
 # General application configuration
 import Config
 
+
+
 config :email_verification, EmailVerification.Guardian,
        issuer: "email_verification",
        secret_key: "9teNnjuLabq0WbNEFq/pY78S/CI3Fj3fz001xhMwT/GCKOnGV5DsPytjoQWVELXh"
@@ -28,7 +30,7 @@ config :email_verification, EmailVerificationWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :email_verification, EmailVerification.Mailer, adapter: Swoosh.Adapters.Local
+config :email_verification, EmailVerification.Mailer, adapter: Swoosh.Adapters.SMTP
 
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false

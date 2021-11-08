@@ -15,9 +15,11 @@ defmodule EmailVerification.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: EmailVerification.PubSub},
       # Start the Endpoint (http/https)
-      EmailVerificationWeb.Endpoint
+      EmailVerificationWeb.Endpoint,
+      {Finch, name: Swoosh.Finch}
       # Start a worker by calling: EmailVerification.Worker.start_link(arg)
       # {EmailVerification.Worker, arg}
+
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
